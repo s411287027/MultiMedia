@@ -1,0 +1,42 @@
+newmtl DarkMetal1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.027451 0.027451 0.027451 
+
+d 1
+
+Ns 0
+
+map_Ka DarkMetal1_diff.png
+map_Kd DarkMetal1_diff.png
+map_d DarkMetal1_diff.png
+
+newmtl Misc1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.027451 0.027451 0.027451 
+
+d 1
+
+Ns 0
+
+map_Ka Misc1_diff.png
+map_Kd Misc1_diff.png
+map_d Misc1_diff.png
+
+newmtl LightMetal1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.027451 0.027451 0.027451 
+
+d 1
+
+Ns 0
+
+map_Ka LightMetal1_diff.png
+map_Kd LightMetal1_diff.png
+map_d LightMetal1_diff.png
+
