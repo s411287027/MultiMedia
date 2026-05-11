@@ -1,0 +1,39 @@
+# exported by https://3dviewer.net
+newmtl SpongeBob_Props
+Kd 0.8 0.8 0.8
+d 1
+Ka 0 0 0
+Ks 0.2 0.2 0.2
+Ns 200
+newmtl Spongebob_Props_Mat
+Kd 1 1 1
+d 1
+Ka 0 0 0
+Ks 0.2 0.2 0.2
+Ns 200
+map_Kd Bob_Props_BaseColor.png
+bump Bob_Props_Normal.png
+newmtl SpongeBob_Props_Glass_02
+Kd 0.8 0.8 0.8
+d 1
+Ka 0 0 0
+Ks 0.2 0.2 0.2
+Ns 200
+newmtl SpongeBob_Mat
+Kd 0.8 0.8 0.8
+d 1
+Ka 0 0 0
+Ks 0.2 0.2 0.2
+Ns 200
+newmtl SpongeBob_Expressions_Mat
+Kd 0.8 0.8 0.8
+d 1
+Ka 0 0 0
+Ks 0.2 0.2 0.2
+Ns 200
+newmtl SpongeBob_MuscleArms
+Kd 0.8 0.8 0.8
+d 1
+Ka 0 0 0
+Ks 0.2 0.2 0.2
+Ns 200
