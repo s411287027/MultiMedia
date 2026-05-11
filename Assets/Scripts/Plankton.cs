@@ -6,11 +6,12 @@ public class Plankton : MonoBehaviour
 
     public float moveSpeed = 10f;
     public float turnSpeed = 8000.0f;
+    private Vector3 initialPosition;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        initialPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -29,6 +30,14 @@ public class Plankton : MonoBehaviour
         if (Keyboard.current.leftArrowKey.isPressed)
         {
             transform.Rotate(new Vector3(0, 1, 0), -turnSpeed * Time.deltaTime, Space.Self);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Car"))
+        {
+            transform.position = initialPosition; // 回到原點
         }
     }
 }
