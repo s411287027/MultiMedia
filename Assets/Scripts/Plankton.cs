@@ -70,8 +70,9 @@ public class Plankton : MonoBehaviour
         if (collision.gameObject.CompareTag("Car"))
         {
             Debug.Log("被車撞了！");
-            transform.position = initialPosition; 
+            transform.position = initialPosition;
         }
+
     }
 
     // 處理暈眩倒數的協程
@@ -90,6 +91,13 @@ public class Plankton : MonoBehaviour
             other.gameObject.SetActive(false);
             normalModel.SetActive(false);
             holdingModel.SetActive(true);
+        }
+
+        // 被廚房旋轉棒掃到，重生回起點
+        if (other.CompareTag("RotatingBar"))
+        {
+            Debug.Log("被旋轉棒打飛了！");
+            transform.position = initialPosition;
         }
     }
 }
