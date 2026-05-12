@@ -7,6 +7,9 @@ TagManager:
   - Car
   - Patty
   - Jellyfish
+  - RotatingBar
+  - Exit
+  - 'Ground '
   layers:
   - Default
   - TransparentFX
