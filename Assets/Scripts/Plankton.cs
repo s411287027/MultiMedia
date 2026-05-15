@@ -8,6 +8,7 @@ public class Plankton : MonoBehaviour
     public float turnSpeed = 12.0f;
     public float jumpForce = 5f;      // 跳躍力道
     public float stunDuration = 2.0f; // 暈眩時間（你可以在 Inspector 中自由調整）
+    public HealthManager healthManager; // 拖入 HealthManager 物件
 
     private Vector3 initialPosition;
     public GameObject normalModel;
@@ -64,12 +65,14 @@ public class Plankton : MonoBehaviour
         if (collision.gameObject.CompareTag("Jellyfish"))
         {
             Debug.Log("被水母電到了！");
+            healthManager.TakeDamage(); // 扣血
             StartCoroutine(StunRoutine());
         }
 
         if (collision.gameObject.CompareTag("Car"))
         {
             Debug.Log("被車撞了！");
+            healthManager.TakeDamage(); // 扣血
             transform.position = initialPosition;
         }
 
@@ -97,6 +100,7 @@ public class Plankton : MonoBehaviour
         if (other.CompareTag("RotatingBar"))
         {
             Debug.Log("被旋轉棒打飛了！");
+            healthManager.TakeDamage(); // 扣血
             transform.position = initialPosition;
         }
     }
