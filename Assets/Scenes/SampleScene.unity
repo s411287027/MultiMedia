@@ -933,9 +933,10 @@ GameObject:
   m_Component:
   - component: {fileID: 323886980}
   - component: {fileID: 323886982}
+  - component: {fileID: 323886983}
   m_Layer: 0
   m_Name: Grass Ground
-  m_TagString: Untagged
+  m_TagString: 'Ground '
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1008,7 +1009,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::JellyfishSpawner
   jellyfishPrefab: {fileID: 8390252435192027361, guid: a9b0bacfc8b44024e9c0a40680c1ec96, type: 3}
   spawnCount: 10
-  spawnAreaSize: {x: 10, y: 0, z: 10}
+  grassGround: {fileID: 323886979}
+--- !u!65 &323886983
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323886979}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5, y: 5, z: 30}
+  m_Center: {x: -5, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -4349,7 +4371,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

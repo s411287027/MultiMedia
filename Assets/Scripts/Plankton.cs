@@ -1,107 +1,153 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections; // 為了使用 Coroutine (協程)
+using System.Collections;
 
 public class Plankton : MonoBehaviour
 {
-    public float moveSpeed = 10f;
-    public float turnSpeed = 12.0f;
-    public float jumpForce = 5f;      // 跳躍力道
-    public float stunDuration = 2.0f; // 暈眩時間（你可以在 Inspector 中自由調整）
-    public HealthManager healthManager; // 拖入 HealthManager 物件
+    public float moveSpeed = 5f;
+    public float turnSpeed = 120f;
+    public float jumpForce = 5f;
+    public HealthManager healthManager;
 
-    private Vector3 initialPosition;
     public GameObject normalModel;
     public GameObject holdingModel;
 
-    private bool isStunned = false; // 是否被暈眩
-    private bool isGrounded = true; // 是否在地面上
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+    private bool isGrounded = true;
     private Rigidbody rb;
 
     void Start()
     {
         initialPosition = transform.position;
-        normalModel.SetActive(true);
-        holdingModel.SetActive(false);
-        rb = GetComponent<Rigidbody>(); // 抓取剛體元件
+        initialRotation = transform.rotation;
+
+        rb = GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = gameObject.AddComponent<Rigidbody>();
+            Debug.LogWarning("Plankton 沒有 Rigidbody，已自動加上。");
+        }
+
+        // 鎖定 X/Z 旋轉，防止被 Boat 撞倒翻滾
+        // 但不鎖 Y 速度，保留跳躍能力
+        rb.constraints = RigidbodyConstraints.FreezeRotationX
+                       | RigidbodyConstraints.FreezeRotationZ;
+
+        if (healthManager == null)
+            Debug.LogError("⚠️ HealthManager 沒有設定！請在 Inspector 拖入！");
+
+        if (normalModel != null) normalModel.SetActive(true);
+        if (holdingModel != null) holdingModel.SetActive(false);
     }
 
     void Update()
     {
-        // 如果處於暈眩狀態，直接跳出 Update，不執行移動與跳躍
-        if (isStunned) return; 
-
-        // 移動邏輯
+        // ↑ 前進
         if (Keyboard.current.upArrowKey.isPressed)
-        {
-            transform.Translate(moveSpeed * Time.deltaTime * transform.forward, Space.World);
-        }
-        if (Keyboard.current.rightArrowKey.isPressed)
-        {
-            transform.Rotate(new Vector3(0, 1, 0), turnSpeed * Time.deltaTime, Space.Self);
-        }
-        if (Keyboard.current.leftArrowKey.isPressed)
-        {
-            transform.Rotate(new Vector3(0, 1, 0), -turnSpeed * Time.deltaTime, Space.Self);
-        }
+            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime, Space.Self);
 
-        // 跳躍邏輯 (按下空白鍵 且 在地面上)
+        // ↓ 後退
+        if (Keyboard.current.downArrowKey.isPressed)
+            transform.Translate(Vector3.back * moveSpeed * Time.deltaTime, Space.Self);
+
+        // ← 左轉
+        if (Keyboard.current.leftArrowKey.isPressed)
+            transform.Rotate(Vector3.up, -turnSpeed * Time.deltaTime, Space.Self);
+
+        // → 右轉
+        if (Keyboard.current.rightArrowKey.isPressed)
+            transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime, Space.Self);
+
+        // A 左平移
+        if (Keyboard.current.aKey.isPressed)
+            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime, Space.Self);
+
+        // D 右平移
+        if (Keyboard.current.dKey.isPressed)
+            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime, Space.Self);
+
+        // 空白鍵跳躍
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
         {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false; // 跳起後狀態改為不在地面
+            isGrounded = false;
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        // 碰到地板，恢復跳躍能力
-        if (collision.gameObject.CompareTag("Ground"))
+        string tag = collision.gameObject.tag;
+        Debug.Log("碰到Tag：" + tag);
+
+        // ===== 地板：恢復跳躍 =====
+        // 用 Layer 名稱比較，避免 Tag 未定義的 Error
+        // 同時也支援 Tag = "Ground"（如果你有設定的話）
+        if (tag == "Ground" || tag == "Untagged")
         {
-            isGrounded = true;
+            // 只要是從下方碰到（法向量朝上），就視為落地
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                if (contact.normal.y > 0.5f)
+                {
+                    isGrounded = true;
+                    break;
+                }
+            }
         }
 
-        // 碰到水母，觸發暈眩
-        if (collision.gameObject.CompareTag("Jellyfish"))
+        // ===== 水母：扣血 + 回原點 =====
+        if (tag == "Jellyfish")
         {
-            Debug.Log("被水母電到了！");
-            healthManager.TakeDamage(); // 扣血
-            StartCoroutine(StunRoutine());
+            Debug.Log("被水母電到！扣血並重生。");
+            if (healthManager != null)
+                healthManager.TakeDamage();
+            else
+                Debug.LogError("HealthManager 是 null！請在 Inspector 拖入！");
+
+            Respawn();
         }
 
-        if (collision.gameObject.CompareTag("Car"))
+        // ===== 車：扣血 + 回原點，但不飛起來 =====
+        if (tag == "Car")
         {
-            Debug.Log("被車撞了！");
-            healthManager.TakeDamage(); // 扣血
-            transform.position = initialPosition;
-        }
+            Debug.Log("被車撞！");
+            if (healthManager != null)
+                healthManager.TakeDamage();
 
+            Respawn();
+        }
     }
 
-    // 處理暈眩倒數的協程
-    private IEnumerator StunRoutine()
+    // 回到初始位置，同時清除所有速度避免繼續飛
+    private void Respawn()
     {
-        isStunned = true; // 開啟暈眩
-        yield return new WaitForSeconds(stunDuration); // 等待設定的秒數
-        isStunned = false; // 解除暈眩
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+        rb.linearVelocity  = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        isGrounded = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Patty"))
+        string tag = other.tag;
+
+        if (tag == "Patty")
         {
-            Debug.Log("拿到美味蟹堡了！");
+            Debug.Log("拿到蟹堡！");
             other.gameObject.SetActive(false);
-            normalModel.SetActive(false);
-            holdingModel.SetActive(true);
+            if (normalModel != null) normalModel.SetActive(false);
+            if (holdingModel != null) holdingModel.SetActive(true);
         }
 
-        // 被廚房旋轉棒掃到，重生回起點
-        if (other.CompareTag("RotatingBar"))
+        if (tag == "RotatingBar")
         {
-            Debug.Log("被旋轉棒打飛了！");
-            healthManager.TakeDamage(); // 扣血
-            transform.position = initialPosition;
+            Debug.Log("被旋轉棒打飛！");
+            if (healthManager != null)
+                healthManager.TakeDamage();
+            Respawn();
         }
     }
 }
