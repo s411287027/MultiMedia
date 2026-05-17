@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class LevelExit : MonoBehaviour
 {
-    [Header("勝利設定")]
-    public bool pauseOnExit = false; // 是否在玩家抵達出口時暫停遊戲
-
+    // 廚房出口只是「通過第三關」的檢查點，不是最終勝利。
+    // 真正的成功是拿到 Krabby Patty（見 Plankton 的 Patty 分支）。
     private bool triggered = false;
 
     private void OnTriggerEnter(Collider other)
@@ -16,11 +15,7 @@ public class LevelExit : MonoBehaviour
         if (other.GetComponent<Plankton>() == null) return;
 
         triggered = true;
-        Debug.Log("凱倫，我成功了！");
-
-        if (pauseOnExit)
-        {
-            Time.timeScale = 0f;
-        }
+        Debug.Log("通過廚房了！繼續去拿蟹堡！");
+        // 不暫停、不結束遊戲，讓皮老闆繼續往蟹堡前進
     }
 }

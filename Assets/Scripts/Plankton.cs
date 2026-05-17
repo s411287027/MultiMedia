@@ -28,6 +28,18 @@ public class Plankton : MonoBehaviour
 
     private Vector3 initialPosition;
     private Quaternion initialRotation;
+
+    // 目前的重生點，預設是出生點，通過檢查點後會被換成該關起點
+    private Vector3 respawnPosition;
+    private Quaternion respawnRotation;
+
+    // 給 Checkpoint 呼叫：把重生點換成第三關（或任何關）的起點
+    public void SetCheckpoint(Vector3 pos, Quaternion rot)
+    {
+        respawnPosition = pos;
+        respawnRotation = rot;
+        Debug.Log("檢查點更新！死掉會回到這裡。");
+    }
     private bool isGrounded = true;
     private bool isShaking = false;
     private Rigidbody rb;
@@ -37,6 +49,8 @@ public class Plankton : MonoBehaviour
     {
         initialPosition = transform.position;
         initialRotation = transform.rotation;
+        respawnPosition = initialPosition;
+        respawnRotation = initialRotation;
 
         rb = GetComponent<Rigidbody>();
         if (rb == null)
@@ -167,8 +181,9 @@ public class Plankton : MonoBehaviour
 
     private void Respawn()
     {
-        transform.position = initialPosition;
-        transform.rotation = initialRotation;
+        Debug.Log($"Respawn 到 {respawnPosition}");
+        transform.position = respawnPosition;
+        transform.rotation = respawnRotation;
         rb.linearVelocity  = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         isGrounded = true;
@@ -180,10 +195,14 @@ public class Plankton : MonoBehaviour
 
         if (tag == "Patty")
         {
-            Debug.Log("拿到蟹堡！");
+            Debug.Log("拿到蟹堡！皮老闆成功了！");
             other.gameObject.SetActive(false);
             if (normalModel != null) normalModel.SetActive(false);
             if (holdingModel != null) holdingModel.SetActive(true);
+
+            // 拿到蟹堡才算真正成功
+            if (healthManager != null)
+                healthManager.Win();
         }
 
         if (tag == "RotatingBar")
