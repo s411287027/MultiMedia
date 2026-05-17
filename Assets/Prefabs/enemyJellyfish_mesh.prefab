@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 153b5c637b16936438ab4e1f00938a53, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.75
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 153b5c637b16936438ab4e1f00938a53, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.75
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 153b5c637b16936438ab4e1f00938a53, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.75
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 153b5c637b16936438ab4e1f00938a53, type: 3}
       propertyPath: m_LocalPosition.x
@@ -101,7 +101,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jellyfish
   moveSpeed: 2
+  verticalSpeed: 0.6
   changeTargetTime: 3
+  minY: 0.2
+  maxY: 2
 --- !u!65 &3037244798921581184
 BoxCollider:
   m_ObjectHideFlags: 0

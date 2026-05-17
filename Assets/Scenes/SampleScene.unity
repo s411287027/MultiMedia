@@ -1029,8 +1029,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 5, z: 30}
-  m_Center: {x: -5, y: 0, z: 0}
+  m_Size: {x: 5, y: 0.1, z: 30}
+  m_Center: {x: -5, y: -0.05, z: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -4409,9 +4409,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Plankton
   moveSpeed: 8
-  turnSpeed: 80
+  turnSpeed: 120
   jumpForce: 5
-  stunDuration: 10
+  fallMultiplier: 2
+  lowJumpMultiplier: 4
+  jellyfishStingSound: {fileID: 8300000, guid: b0edd288afc48da419cada946c91ae0e, type: 3}
+  shakeDuration: 3
+  shakeAngle: 10
+  shakeSpeed: 10
+  bounceHeight: 0.15
+  bounceSpeed: 15
   healthManager: {fileID: 1394433727}
   normalModel: {fileID: 816701942}
   holdingModel: {fileID: 941834674}
