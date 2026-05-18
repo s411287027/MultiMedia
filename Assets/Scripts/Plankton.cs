@@ -159,7 +159,7 @@ public class Plankton : MonoBehaviour
         {
             elapsed += Time.deltaTime;
 
-            float angle   = Mathf.Sin(elapsed * shakeSpeed)  * shakeAngle;
+            float angle = Mathf.Sin(elapsed * shakeSpeed) * shakeAngle;
             float offsetY = Mathf.Sin(elapsed * bounceSpeed) * bounceHeight;
 
             transform.rotation = baseRotation * Quaternion.Euler(0f, 0f, angle);
@@ -184,7 +184,7 @@ public class Plankton : MonoBehaviour
         Debug.Log($"Respawn 到 {respawnPosition}");
         transform.position = respawnPosition;
         transform.rotation = respawnRotation;
-        rb.linearVelocity  = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         isGrounded = true;
     }
@@ -195,14 +195,19 @@ public class Plankton : MonoBehaviour
 
         if (tag == "Patty")
         {
-            Debug.Log("拿到蟹堡！皮老闆成功了！");
+
+            // 直接用自己腳本裡的 SetCheckpoint，把位置設到該 Patty 的位置
+            SetCheckpoint(other.transform.position, other.transform.rotation);
+
+            Debug.Log("主動偵測：踩到蟹堡，重設重生點！");
+            //Debug.Log("拿到蟹堡！皮老闆成功了！");
             other.gameObject.SetActive(false);
             if (normalModel != null) normalModel.SetActive(false);
             if (holdingModel != null) holdingModel.SetActive(true);
 
             // 拿到蟹堡才算真正成功
-            if (healthManager != null)
-                healthManager.Win();
+            //if (healthManager != null)
+            //    healthManager.Win();
         }
 
         if (tag == "RotatingBar")
