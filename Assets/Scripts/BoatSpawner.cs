@@ -33,7 +33,7 @@ public class BoatSpawner : MonoBehaviour
     void SpawnBoat()
     {
         // 隨機位置
-        Vector3 spawnPos = transform.position + new Vector3(Random.Range(-laneOffset, laneOffset), 1, 0);
+        Vector3 spawnPos = transform.position + new Vector3(Random.Range(-laneOffset, laneOffset), 0.2f, 0);
 
         // 產生船
         Instantiate(boatPrefab, spawnPos, transform.rotation);
