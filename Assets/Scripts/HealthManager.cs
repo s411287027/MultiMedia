@@ -10,7 +10,7 @@ public class HealthManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject winPanel;     // 勝利畫面（拿到蟹堡時顯示，Inspector 拖入）
     public GameTimer gameTimer;     // ��J GameTimer ����
-
+    public WinPanelController winPanelController;
     private int currentHealth = 3;
     private bool gameEnded = false; // 已結束（勝或敗）就不再接受傷害／重覆觸發
 
@@ -20,9 +20,16 @@ public class HealthManager : MonoBehaviour
         if (gameEnded) return;
         gameEnded = true;
 
-        if (winPanel != null) winPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;  // 加這行
+        Cursor.visible = true;                    // 加這行
+
         if (gameTimer != null) gameTimer.StopTimer();
-        // 不暫停遊戲，拿到蟹堡後皮老闆還能繼續動，不會卡住
+
+        if (winPanel != null) winPanel.SetActive(true);
+
+        // 把耗時傳給 WinPanel 顯示
+        if (winPanelController != null && gameTimer != null)
+            winPanelController.ShowResult(gameTimer.GetElapsedTime());
     }
 
     public void TakeDamage()
@@ -42,6 +49,10 @@ public class HealthManager : MonoBehaviour
     void GameOver()
     {
         gameEnded = true;
+
+        Cursor.lockState = CursorLockMode.None;  // 加這行
+        Cursor.visible = true;                    // 加這行
+
         gameOverPanel.SetActive(true);
         gameTimer.StopTimer();
         Time.timeScale = 0f; // �Ȱ��C��

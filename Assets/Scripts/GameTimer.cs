@@ -20,8 +20,7 @@ public class GameTimer : MonoBehaviour
     }
 
     // 遊戲結束時呼叫這個停止計時
-    public void StopTimer()
-    {
-        isRunning = false;
-    }
+    public void StopTimer() => isRunning = false;
+
+    public float GetElapsedTime() => elapsedTime; // 新增
 }
