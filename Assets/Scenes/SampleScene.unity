@@ -3089,7 +3089,7 @@ Transform:
   m_GameObject: {fileID: 759580275}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.25, y: 0.005, z: -12.84}
+  m_LocalPosition: {x: -15, y: 0.005, z: -12.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5635,6 +5635,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 995801961}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1509707945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0276d9320574425448508aadc83a0388, type: 3}
+  m_PrefabInstance: {fileID: 1716570695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1509707947
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509707945}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 61.497784, y: 110.524216, z: 44.964092}
+  m_Center: {x: 1847.3182, y: 54.762115, z: 304.953}
 --- !u!1 &1520951317
 GameObject:
   m_ObjectHideFlags: 0
@@ -6528,7 +6554,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0276d9320574425448508aadc83a0388, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1509707947}
   m_SourcePrefab: {fileID: 100100000, guid: 0276d9320574425448508aadc83a0388, type: 3}
 --- !u!1 &1731687817
 GameObject:
@@ -6643,8 +6672,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.21706836, y: 0.52546656, z: 0.22351068}
-  m_Center: {x: -0.17304735, y: -0.048270702, z: 1.6585546}
+  m_Size: {x: 0.22071803, y: 0.73890513, z: 0.25991815}
+  m_Center: {x: -0.0024477094, y: 0.1523638, z: -0.003085494}
 --- !u!114 &1751132088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7540,15 +7569,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c39b8a337f8837644a56481cf592dc57, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 137.779
+      value: -25.383
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c39b8a337f8837644a56481cf592dc57, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.09689999
+      value: 0.183
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c39b8a337f8837644a56481cf592dc57, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.638
+      value: 135.541
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c39b8a337f8837644a56481cf592dc57, type: 3}
       propertyPath: m_LocalRotation.w

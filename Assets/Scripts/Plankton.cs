@@ -91,10 +91,10 @@ public class Plankton : MonoBehaviour
 
         pendingMoveDir = Vector3.zero;
 
-        if (Keyboard.current.upArrowKey.isPressed) pendingMoveDir += forward;
-        if (Keyboard.current.downArrowKey.isPressed) pendingMoveDir -= forward;
-        if (Keyboard.current.leftArrowKey.isPressed) pendingMoveDir -= right;
-        if (Keyboard.current.rightArrowKey.isPressed) pendingMoveDir += right;
+        if (Keyboard.current.wKey.isPressed) pendingMoveDir += forward;
+        if (Keyboard.current.sKey.isPressed) pendingMoveDir -= forward;
+        if (Keyboard.current.aKey.isPressed) pendingMoveDir -= right;
+        if (Keyboard.current.dKey.isPressed) pendingMoveDir += right;
 
         // 皮老闆朝向跟相機 yaw 同步
         transform.rotation = Quaternion.Slerp(
@@ -229,7 +229,7 @@ public class Plankton : MonoBehaviour
             if (normalModel != null) normalModel.SetActive(false);
             if (holdingModel != null) holdingModel.SetActive(true);
 
-            
+
 
             // 拿到蟹堡才算真正成功
             //if (healthManager != null)
