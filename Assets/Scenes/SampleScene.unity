@@ -1690,7 +1690,7 @@ MonoBehaviour:
   target: {fileID: 1751132089}
   distance: 2
   height: 0.8
-  mouseSensitivity: 20
+  mouseSensitivity: 3
   pitchMin: 5
   pitchMax: 60
 --- !u!1 &347412759

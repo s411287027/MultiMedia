@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
     public Transform target;
     public float distance = 5f;
     public float height = 2f;
-    public float mouseSensitivity = 3f;
+    public float mouseSensitivity = 1f;
 
     private float yaw = 0f;
     private float pitch = 1f;
@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // ¥Î¥Ö¦ÑÁó¥Ø«eªº´Â¦Vªì©l¤Æ yaw
+        // ï¿½Î¥Ö¦ï¿½ï¿½ï¿½Ø«eï¿½ï¿½ï¿½Â¦Vï¿½ï¿½lï¿½ï¿½ yaw
         yaw = target.eulerAngles.y;
     }
 
@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour
     {
         Vector2 mouseDelta = Mouse.current.delta.ReadValue();
 
-        // ¥u«O¯d¥ª¥k
+        // ï¿½uï¿½Oï¿½dï¿½ï¿½ï¿½k
         yaw += mouseDelta.x * mouseSensitivity * Time.deltaTime * 10f;
 
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0f);
