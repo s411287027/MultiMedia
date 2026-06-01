@@ -3351,6 +3351,62 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549976504}
   m_Mesh: {fileID: 506893626503705964, guid: b0d0bd9d935749f4c8b689f321d22887, type: 3}
+--- !u!1 &560670025
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 560670027}
+  - component: {fileID: 560670026}
+  m_Layer: 0
+  m_Name: MapBoundary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &560670026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560670025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e95d76c5c9331c9459a950eff113a479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapBoundary
+  groundObjects:
+  - {fileID: 323886979}
+  - {fileID: 1296167884}
+  - {fileID: 1777011105}
+  - {fileID: 1715914588}
+  - {fileID: 1447594918}
+  - {fileID: 759636209}
+  - {fileID: 1507734402}
+  wallHeight: 10
+  wallThickness: 2
+  inset: 0
+  showWalls: 0
+--- !u!4 &560670027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560670025}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.735, y: 0, z: 1.89818}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &589732566 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7768796009490323730, guid: b0d0bd9d935749f4c8b689f321d22887, type: 3}
@@ -14515,3 +14571,4 @@ SceneRoots:
   - {fileID: 476821488}
   - {fileID: 867484518}
   - {fileID: 1403810641}
+  - {fileID: 560670027}
