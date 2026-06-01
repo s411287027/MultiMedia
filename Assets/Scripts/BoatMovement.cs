@@ -17,6 +17,22 @@ public class BoatMovement : MonoBehaviour
             spawnRotationY,
             transform.eulerAngles.z
         );
+
+        // 忽略與地圖邊緣隱形牆的碰撞，否則船開到牆邊會被彈飛
+        IgnoreBoundaryWalls();
+    }
+
+    void IgnoreBoundaryWalls()
+    {
+        Collider[] myColliders = GetComponentsInChildren<Collider>();
+        if (myColliders.Length == 0) return;
+
+        foreach (Collider wall in MapBoundary.WallColliders)
+        {
+            if (wall == null) continue;
+            foreach (Collider mine in myColliders)
+                Physics.IgnoreCollision(mine, wall);
+        }
     }
 
     void Update()
