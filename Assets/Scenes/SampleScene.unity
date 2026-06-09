@@ -2173,7 +2173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JellyfishSpawner
   jellyfishPrefab: {fileID: 8390252435192027361, guid: a9b0bacfc8b44024e9c0a40680c1ec96, type: 3}
-  spawnCount: 10
+  spawnCount: 20
   grassGround: {fileID: 323886979}
 --- !u!65 &323886983
 BoxCollider:
@@ -11708,6 +11708,7 @@ MonoBehaviour:
   fallMultiplier: 2
   lowJumpMultiplier: 4
   jellyfishStingSound: {fileID: 8300000, guid: b0edd288afc48da419cada946c91ae0e, type: 3}
+  crashSound: {fileID: 8300000, guid: a42e43798ac95844dbcdaa3bbccb00b5, type: 3}
   shakeDuration: 3
   shakeAngle: 10
   shakeSpeed: 10

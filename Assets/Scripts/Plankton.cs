@@ -14,6 +14,7 @@ public class Plankton : MonoBehaviour
 
     [Header("音效")]
     public AudioClip jellyfishStingSound;
+    public AudioClip crashSound;
 
     [Header("被電特效")]
     public float shakeDuration = 3f;
@@ -156,6 +157,7 @@ public class Plankton : MonoBehaviour
         if (tag == "Car")
         {
             Debug.Log("被車撞！");
+            audioSource.PlayOneShot(crashSound);
             if (healthManager != null)
                 healthManager.TakeDamage();
             Respawn();
