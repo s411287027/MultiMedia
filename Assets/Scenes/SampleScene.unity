@@ -11707,7 +11707,7 @@ MonoBehaviour:
   jumpForce: 4
   fallMultiplier: 2
   lowJumpMultiplier: 4
-  jellyfishStingSound: {fileID: 8300000, guid: b0edd288afc48da419cada946c91ae0e, type: 3}
+  jellyfishStingSound: {fileID: 8300000, guid: 6abddc8fea5cb4240b8a3f19f4eece10, type: 3}
   crashSound: {fileID: 8300000, guid: a42e43798ac95844dbcdaa3bbccb00b5, type: 3}
   shakeDuration: 3
   shakeAngle: 10
